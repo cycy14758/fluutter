@@ -1,48 +1,55 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hello World demo application',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Home Page'),
-        ),
-        body: Center(
-          child: MyButton(),
-        ),
-      ),
+      home: MyHomePage(),
     );
   }
 }
 
-class MyButton extends StatelessWidget {
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 100.0,
-        width: 100.0,
-        color: Colors.yellow,
-        child: Align(
-          alignment: FractionalOffset(0.2, 0.6),
-          child: Container(
-            height: 40.0,
-            width: 40.0,
-            color: Colors.red,
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Gesture Detection App'),
+      ),
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            _showDialog(context);
+          },
+          child: Text('Hello World'),
         ),
       ),
+    );
+  }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Message"),
+          content: Text("Hello World"),
+       actions: <Widget>[
+  TextButton(
+    child: Text("Close"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  ),
+],
+
+          
+        );
+      },
     );
   }
 }
